@@ -8,7 +8,7 @@ export default function Home({ onLogout }) {
 
   const fetchTasks = async () => {
     try {
-      const url = "http://localhost:3000/tasks";
+      const url = "https://fullstack-practice-gfa0.onrender.com/tasks";
       const options = {
         method: "GET",
         headers: { Authorization: `Bearer ${token}` },
@@ -27,7 +27,7 @@ export default function Home({ onLogout }) {
   }, []);
 
   const handleDelete = async (id) => {
-    await fetch(`http://localhost:3000/tasks/${id}`, {
+    await fetch(`https://fullstack-practice-gfa0.onrender.com/tasks/${id}`, {
       method: "DELETE",
       headers: { Authorization: `Bearer ${token}` },
     });

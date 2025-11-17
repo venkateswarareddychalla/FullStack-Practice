@@ -14,7 +14,7 @@ export default function Add() {
     e.preventDefault();
     // const formattedDate = new Date(form.dueDate).toISOString().split("T")[0];
     // form.dueDate = formattedDate;
-    await fetch("http://localhost:3000/tasks", {
+    await fetch("https://fullstack-practice-gfa0.onrender.com/tasks", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

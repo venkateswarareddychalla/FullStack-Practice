@@ -13,7 +13,7 @@ export default function Login({ onLogin }) {
     e.preventDefault();
     try {
       const endpoint = isLogin ? "/login" : "/register";
-      const res = await fetch(`http://localhost:3000${endpoint}`, {
+      const res = await fetch(`https://fullstack-practice-gfa0.onrender.com${endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name, email, password }),
