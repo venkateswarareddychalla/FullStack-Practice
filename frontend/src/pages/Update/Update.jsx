@@ -1,0 +1,69 @@
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+
+export default function Update() {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+  const [form, setForm] = useState({
+    title: "",
+    priority: "Medium",
+    dueDate: "",
+  });
+
+  useEffect(() => {
+    (async () => {
+      const res = await fetch("http://localhost:3000/tasks", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      const {tasks} = await res.json();
+      const task = tasks.find((t) => t.id === parseInt(id));
+      if (task) setForm(task);
+    })();
+  }, [id]);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // const formatted = new Date(form.dueDate).toISOString().split("T")[0];
+    // form.dueDate = formatted;
+    await fetch(`http://localhost:3000/tasks/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(form),
+    });
+    navigate("/");
+  };
+
+  return (
+    <div className="form-container">
+      <h2>Update Task</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          placeholder="Task Title"
+          value={form.title}
+          onChange={(e) => setForm({ ...form, title: e.target.value })}
+          required
+        />
+        <select
+          value={form.priority}
+          onChange={(e) => setForm({ ...form, priority: e.target.value })}
+        >
+          <option>High</option>
+          <option>Medium</option>
+          <option>Low</option>
+        </select>
+        <input
+          type="date"
+          value={form.dueDate}
+          onChange={(e) => setForm({ ...form, dueDate: e.target.value })}
+          required
+        />
+        <button type="submit">Update Task</button>
+      </form>
+    </div>
+  );
+}
