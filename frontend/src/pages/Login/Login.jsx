@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function Login({ onLogin }) {
-  const [isLogin, setIsLogin] = useState(true);
-  const [name, setName] = useState("");
+  const [isLogin, setIsLogin] = useState(true);  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");

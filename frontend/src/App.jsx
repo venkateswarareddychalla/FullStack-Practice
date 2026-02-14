@@ -27,7 +27,7 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         {/* Login Page */}
-        <Route path="/login" element={<Login onLogin={handleLogin} />} />
+        <Route path="/login" element={token ? <Home onLogout={handleLogout} />: <Login onLogin={handleLogin} />} />
 
         {/* Home Page */}
         <Route

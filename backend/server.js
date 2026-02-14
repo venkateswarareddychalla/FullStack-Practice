@@ -229,10 +229,11 @@
 
 
 import express from "express";
-import Database from "better-sqlite3";
 import cors from "cors";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
+import Database from "better-sqlite3";
 import { fileURLToPath } from "url";
 import { dirname, join } from "path";
 
@@ -303,10 +304,10 @@ app.post("/register", async (req, res) => {
     const result = insert.run(name, email, hashedPassword);
 
     const token = generateJWTToken(result.lastInsertRowid);
-    res.status(200).json({ success: true, message: "User Registered Successfully", token });
+    res.status(200).send("registered successfully");
   } catch (error) {
     console.log(error);
-    res.status(500).json({ success: false, message: "Server Error" });
+    res.status(500).send({ success: false, message: "Server Error" });
   }
 });
 
